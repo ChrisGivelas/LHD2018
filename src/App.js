@@ -41,7 +41,6 @@ class App extends Component {
           <Button onClick={this.handleSearch}>Search</Button>
         </div>
         <div id="cardContainer">
-          
           <Card name="Dis Bish" score="2" reviewCount="12312" categories="Coffee"/>
           <Card name="Dis Bish" score="2" reviewCount="12312" categories="Coffee"/>
           <Card name="Dis Bish" score="2" reviewCount="12312" categories="Coffee"/>
