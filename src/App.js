@@ -13,13 +13,13 @@ class App extends Component {
   }
 
   handleSearch = () => {
-    navigator.geolocation.getCurrentPosition(function (pos) {
-      console.log(pos)
-      let params = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }
-      yelp.search(params).then(function (res) {
-        console.log(res)
-        //this.setState(prev => ({ search: prev.search, results: businesses }))
-      })
+    fetch("http://localhost:8080/search", {
+      method: 'post',
+      mode: 'no-cors',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: JSON.stringify({ hello: "bye" })
     })
   }
 
