@@ -1,0 +1,8 @@
+.Card {
+    position: relative;
+}
+
+.cardText{
+    size: 12px;
+    font-weight: 600
+}
