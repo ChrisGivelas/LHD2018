@@ -1,27 +1,46 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as Yelp from 'yelp-fusion'
+import { Button, FormControl } from 'react-bootstrap'
+
+let apiKey = 'AHvS0mIi8sbLjfEfjF07C4Fn-uGWyFmYLBptX78nxq2bVK2iLd6TKP4mt2wzgTZ4iEm9GgWcavUZQXRuAxMyy0Z8n_5FkvIfJXJb4yYs7Goa7_K4jEhlPwOKEdkCXHYx';
+let yelp = Yelp.client(apiKey);
 
 class App extends Component {
+  state = {
+    search: "Chez Piggy",
+    results: []
+  }
+
+  handleSearch = () => {
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      console.log(pos)
+      let params = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }
+      yelp.search(params).then(function (res) {
+        console.log(res)
+        //this.setState(prev => ({ search: prev.search, results: businesses }))
+      })
+    })
+  }
+
+  handleChange = e => {
+    this.setState(({ search: e.target.value }))
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div id="app">
+        <div id="main">
+          <h1>Welcome to NoWayJose!</h1>
+          <h4>Start typing in the name of a restaurant, and we'll let you know if you should avoid it.</h4>
+          <h6>Think of us as the anti-Yelp...</h6>
+          <FormControl type="text"
+            value={this.state.value}
+            placeholder="Search a restuarant here"
+            onChange={this.handleChange} />
+          <Button onClick={this.handleSearch}>Search</Button>
+        </div>
       </div>
-    );
+    )
   }
 }
 

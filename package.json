@@ -4,9 +4,14 @@
   "private": true,
   "homepage": "http://ChrisGivelas.github.io/lhd2018",
   "dependencies": {
+    "geocoder": "^0.2.3",
     "react": "^16.6.3",
+    "react-bootstrap": "^0.32.4",
     "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "xml2js": "^0.4.19",
+    "yelp-api": "^1.0.3",
+    "yelp-fusion": "^2.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
