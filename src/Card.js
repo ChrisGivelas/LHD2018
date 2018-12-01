@@ -3,13 +3,14 @@ import './Card.css';
 
 
 const Card = (props) => {
+    console.log(props)
     return(
         <div className="Card"> 
-            {/* <img src={props.imageURL} className="businessImage"></img> */}
+            <img src={props.image_url} className="businessImage"></img>
             <p className="businessName">{props.name}</p>
-            <p className="cardText">{props.score}</p>
-            <p className="cardText"> {props.reviewCount}</p>
-            <p className="cardText">{props.categories}</p>
+            <p className="cardText"> {props.review_count}</p>
+            <p className="cardText">{props.category}</p>
+            <p className="cardText">{props.rating}</p>
         </div>
     );
 };

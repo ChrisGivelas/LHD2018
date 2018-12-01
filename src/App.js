@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import * as Yelp from 'yelp-fusion'
 import { Button, FormControl } from 'react-bootstrap';
 import Card from './Card';
+import axios from 'axios';
+
+
 
 let apiKey = 'AHvS0mIi8sbLjfEfjF07C4Fn-uGWyFmYLBptX78nxq2bVK2iLd6TKP4mt2wzgTZ4iEm9GgWcavUZQXRuAxMyy0Z8n_5FkvIfJXJb4yYs7Goa7_K4jEhlPwOKEdkCXHYx';
 let yelp = Yelp.client(apiKey);
@@ -13,15 +16,27 @@ class App extends Component {
   }
 
   handleSearch = () => {
-    fetch("http://localhost:8080/search", {
-      method: 'post',
-      mode: 'no-cors',
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: JSON.stringify({ hello: "bye" })
-    })
+    axios.post('http://localhost:8080/search', {
+    latitude: 44.225575 ,
+    longitude: -76.5014243,
+    categories: 'bars'
+  }).then( res => {
+    let businesses = JSON.parse(res.data.body).businesses;
+    console.log(businesses)
+    let results = [];
+    
+    businesses.map( business => {
+      let businessObject = {};
+      businessObject.name = business.name;
+      businessObject.rating = business.rating;
+      businessObject.review_count = business.review_count;
+      businessObject.image_url = business.image_url
+      results.push(businessObject);
+    });
+    this.setState({results: results})
+  });
   }
+
 
   handleChange = e => {
     this.setState(({ search: e.target.value }))
@@ -41,10 +56,11 @@ class App extends Component {
           <Button onClick={this.handleSearch}>Search</Button>
         </div>
         <div id="cardContainer">
-          <Card name="Dis Bish" score="2" reviewCount="12312" categories="Coffee"/>
-          <Card name="Dis Bish" score="2" reviewCount="12312" categories="Coffee"/>
-          <Card name="Dis Bish" score="2" reviewCount="12312" categories="Coffee"/>
-          <Card name="Dis Bish" score="2" reviewCount="12312" categories="Coffee"/>
+          {this.state.results.map( result => {
+            return(
+                <Card {...result} category="bar"/>
+            )
+          })}
         </div>
 
       </div>

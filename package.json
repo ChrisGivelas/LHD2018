@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://ChrisGivelas.github.io/lhd2018",
   "dependencies": {
+    "axios": "^0.18.0",
     "geocoder": "^0.2.3",
     "react": "^16.6.3",
     "react-bootstrap": "^0.32.4",
